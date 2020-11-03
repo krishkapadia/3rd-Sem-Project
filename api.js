@@ -21,10 +21,24 @@ obj.app.get("/signup", (req, res) => {
         email: req.query.email,
         phone: req.query.phone
     });
-    tmp.save((err, data) => {
+    obj.tblUser.find({username:tmp.username,password:tmp.password,email:tmp.email,phone:tmp.phone},(err,data)=>{
+        if (JSON.stringify(data).length > 2)
+        {
+            res.send("User Already Signup..");
+        }
+        else
+        {
+            tmp.save((err, data) => {
+                console.log(data);
+                res.send(JSON.stringify(data));
+            })
+        }
+        //console.log(data);
+    })
+    /*tmp.save((err, data) => {
         console.log(data);
         res.send(JSON.stringify(data));
-    })
+    })*/
 })
 obj.app.listen(port, () => {
     console.log("Server running on port : ", port)
