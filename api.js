@@ -9,7 +9,7 @@ obj.app.get("/login", (req, res) => {
         console.log(data);
 
         if (JSON.stringify(data).length > 2)
-            res.send(JSON.stringify(data));
+            res.send(JSON.stringify({data:data}));
         else
             res.send("Login Fail")
     })
